@@ -8,7 +8,7 @@ export default function FCNewIngredients()
   const [nametxt,setNameTxt]=useState('')
   const [imageTxt, setImageTxt] = useState('')
   const [caloriesTxt,setCaloriesTxt]=useState('')
-  const [counter,setCounter]=useState(6)
+  const [counter,setCounter]=useState(3)
     const AddNewIngredient=()=>
     {
       alert(nametxt)

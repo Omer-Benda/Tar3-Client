@@ -14,31 +14,28 @@ export default function FCCreateRecipe() {
   const [c,setC]=useState([])
   // e.target.checked
   const choosIng=(e)=>{
+
 if (e.target.checked) {
   alert("yes")
-  setC([...c,arr[e.target.dataset.pid]])
-  alert(arr[e.target.dataset.pid].name)
+  console.log(c)
+  setC([...c,arr[e.target.id]])
+  alert(arr[e.target.id].name)
+  console.log(c)
 }
 else{
   alert("no")
-  
-  // alert(c.filter(c=>c.id==e.target.dataset.pid).name)
-  // setC(prev=>c.filter(c=>c.id==e.target.dataset.pid).delete)
-  // alert(setC(prev=>c.filter(c=>c.id==e.target.dataset.pid)))
-  // alert(setC(prev=>prev.find(xx=>xx.id==e.target.dataset.pid)))
-  // setC(prevC=>prevC.filter(x=>x.id==e.target.dataset.pid.name))
-  // alert(setC(prevC=>prevC.filter(x=>x.id==e.target.dataset.pid.name)))
+  setC(c.filter(ingr =>ingr.id===e.target.id))
+  console.log(c)
 }
 
   }
   const AddNewRecipe=()=>
   {
-// alert(ReactDOM.render(<FCCreateRecipe/>, document.getElementById("")))
 
 
     alert(recepiesNameTxt)
     {setRecepiesCounter(prevC=>prevC+1)}
-    const apiUrl='https://localhost:44358/api/Recipe'
+    const apiUrl='https://localhost:44358/api/createrecipe'
     fetch(apiUrl,
       {
       method: 'POST',
@@ -47,7 +44,8 @@ else{
         name:recepiesNameTxt,
         image:recepiesImageTxt,
         cookingMethod:recepiesCookingMethodTxt,
-        time:recepiesTimeTxt
+        time:recepiesTimeTxt,
+        ingList:c
       }
      ),
       headers: new Headers({
@@ -130,7 +128,8 @@ else{
         {
           return(
             <div className='col-sm-12'>
-        
+          <input type="checkbox" id={ing.id} data-pid={ing.id} onChange={(e)=>choosIng(e)}/>
+
             <FCIngredient 
             key={ing.id}
             name={ing.name}
@@ -139,7 +138,6 @@ else{
             id={ing.id}
             />
             {/* <input type="checkbox"  data-pid={ing.id} onClick={(e)=>{setC(alert(e.target.dataset.pid))}}/> */}
-            <input type="checkbox" data-pid={ing.id} onClick={choosIng}/>
             </div>
            
           )

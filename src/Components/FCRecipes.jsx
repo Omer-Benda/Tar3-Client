@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import FCRecipe from './FCRecipe';
 
 export default function FCRecipes() 
@@ -50,7 +49,7 @@ const GetRecipes=()=>
             image={rec.image}
             cookingmethod={rec.cookingMethod}
             cookingtime={rec.time}
-            inglist={rec.inglist}
+            ingList={rec.ingList}
 
             />
           )

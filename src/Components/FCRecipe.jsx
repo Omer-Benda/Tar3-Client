@@ -1,6 +1,14 @@
 import React from 'react'
+import { useState } from 'react';
+import FCIngredient from './FCIngredient';
 
 export default function FCRecipe(props) {
+
+    const [isShown, setIsShown] = useState(false);
+
+    const handleclick=()=>{
+      setIsShown(current => !current);       
+    }
   return (
     
     <div className='recipe'>
@@ -8,7 +16,22 @@ export default function FCRecipe(props) {
             <p>Name: {props.name}</p>
             <p>Cooking Method: {props.cookingmethod}</p>
             <p>Cooking Time: {props.cookingtime}</p>
-            <button >Show Ingredients</button>
+
+            <button onClick={handleclick}>Show Ingredients</button>
+
+            <div style={{display: isShown ? 'block' : 'none'}}>            
+            {props.ingList.map((ing)=>{    
+              return(        
+          <FCIngredient 
+          key={ing.id} 
+          name={ing.name}
+          image={ing.image}
+          calories={ing.calories}
+          id={ing.id}
+          />
+              )
+           })}
+       </div>
         </div>
   )
 }
